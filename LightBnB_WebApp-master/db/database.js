@@ -109,6 +109,7 @@ const getAllProperties = (options, limit = 10) => {
   JOIN property_reviews ON properties.id = property_id
   `;
   
+  // search for listings in a city
   if (options.city) {
     queryParams.push(`%${options.city}%`);
     queryString += `WHERE city LIKE $${queryParams.length} `;
@@ -119,14 +120,17 @@ const getAllProperties = (options, limit = 10) => {
     queryString += `AND owner_id = $${queryParams.length} `;
   }
 
+  //search if a minimum price and a maximum price are entered
   if (options.minimum_price_per_night && options.maximum_price_per_night) {
     queryParams.push(`${options.minimum_price_per_night * 100}`);
     queryString += `AND cost_per_night >= $${queryParams.length} `;
     queryParams.push(`${options.maximum_price_per_night * 100}`);
     queryString += `AND cost_per_night <= $${queryParams.length} `;
+  // search if only a minimum price is entered
   } else if (options.minimum_price_per_night) {
     queryParams.push(`${options.minimum_price_per_night * 100}`);
     queryString += `AND cost_per_night >= $${queryParams.length} `;
+  // search if only a maximum price is entered
   } else if (options.maximum_price_per_night) {
     queryParams.push(`${options.maximum_price_per_night * 100}`);
     queryString += `AND cost_per_night <= $${queryParams.length} `;
@@ -136,11 +140,13 @@ const getAllProperties = (options, limit = 10) => {
   GROUP BY properties.id
   `;
 
+  // search for minimum user rating for a property
   if (options.minimum_rating) {
     queryParams.push(`${options.minimum_rating}`);
     queryString += `HAVING AVG(property_reviews.rating) >= $${queryParams.length}`;
   }
 
+  // order by cost_per_night and limit the number of results listed
   queryParams.push(limit);
   queryString += `
   ORDER BY cost_per_night
@@ -158,9 +164,40 @@ const getAllProperties = (options, limit = 10) => {
  */
 const addProperty = function (property) {
   return pool
-  .query(`INSERT INTO properties (owner_id, title, description, thumbnail_photo_url, cover_photo_url, cost_per_night, street, city, province, post_code, country, parking_spaces, number_of_bathrooms, number_of_bedrooms)
-  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *;`, 
-  [property.owner_id, property.title, property.description, property.thumbnail_photo_url, property.cover_photo_url, property.cost_per_night, property.street, property.city, property.province, property.post_code, property.country, property.parking_spaces, property.number_of_bathrooms, property.number_of_bedrooms])
+  .query(`
+  INSERT INTO properties (
+  owner_id,
+  title,
+  description,
+  thumbnail_photo_url,
+  cover_photo_url,
+  cost_per_night,
+  street,
+  city,
+  province,
+  post_code,
+  country,
+  parking_spaces,
+  number_of_bathrooms,
+  number_of_bedrooms
+  )
+  VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14) RETURNING *;
+  `,
+  [property.owner_id,
+  property.title,
+  property.description,
+  property.thumbnail_photo_url,
+  property.cover_photo_url,
+  property.cost_per_night,
+  property.street,
+  property.city,
+  property.province,
+  property.post_code,
+  property.country,
+  property.parking_spaces,
+  property.number_of_bathrooms,
+  property.number_of_bedrooms]
+  )
   .then((result) => {
     return result.rows[0];
   })
