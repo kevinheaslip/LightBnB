@@ -18,10 +18,10 @@ A simple multi-page Airbnb clone that uses a server side Javascript to display t
 
 1. Create a new repository using this repository as a template.
 2. Clone your repository onto your local device.
-3. cd to LightBnB_WebApp-master directory inside root directory
+3. `cd` to `LightBnB_WebApp-master` directory inside root directory
 4. Install dependencies using the npm install command.
-5. Start the web server using the npm run local command. The app will be served at http://localhost:3000/.
-6. Go to http://localhost:3000/ in your browser.
+5. Start the web server using the npm run local command. The app will be served at `http://localhost:3000/`.
+6. Go to `http://localhost:3000/` in your browser.
 
 ## Dependencies
 
