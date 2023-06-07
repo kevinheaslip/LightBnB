@@ -5,10 +5,13 @@ A simple multi-page Airbnb clone that uses a server side Javascript to display t
 ## Screenshots
 
 ![Main page](https://github.com/kevinheaslip/LightBnB/blob/main/docs/index.png)
+Landing page
 
 ![Search for listings](https://github.com/kevinheaslip/LightBnB/blob/main/docs/searchforlistings.png)
+Search for listings
 
 ![Search results](https://github.com/kevinheaslip/LightBnB/blob/main/docs/searchresults.png)
+Search results
 
 ## Entity Relationship Diagram
 
