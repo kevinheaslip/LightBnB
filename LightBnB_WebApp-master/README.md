@@ -1,5 +1,36 @@
 # LightBnB
 
+A simple multi-page Airbnb clone that uses a server side Javascript to display the information from queries to web pages via SQL queries.
+
+## Screenshots
+
+![Main page](https://github.com/kevinheaslip/LightBnB/blob/main/docs/index.png)
+
+![Search for listings](https://github.com/kevinheaslip/LightBnB/blob/main/docs/searchforlistings.png)
+
+![Search results](https://github.com/kevinheaslip/LightBnB/blob/main/docs/searchresults.png)
+
+## Entity Relationship Diagram
+
+![LightBnB ERD](https://github.com/kevinheaslip/LightBnB/blob/main/docs/erd.png)
+
+## Getting Started
+
+1. Create a new repository using this repository as a template.
+2. Clone your repository onto your local device.
+3. Install dependencies using the npm install command.
+4. Start the web server using the npm run local command. The app will be served at http://localhost:3000/.
+5. Go to http://localhost:3000/ in your browser.
+
+## Dependencies
+
+- Express
+- Node 5.10.x or above
+- bcrypt
+- cookie-session
+- nodemon
+- pg
+
 ## Project Structure
 
 ```
